@@ -15,7 +15,7 @@
  */
 
 #include "webrtc/common_audio/signal_processing/resample_by_2_internal.h"
-#include "webrtc/headers/sanitizer.h"
+#include "webrtc/headers//sanitizer.h"
 
 // allpass filter coefficients.
 static const int16_t kResampleAllpass[2][3] = {

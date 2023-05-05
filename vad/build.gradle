@@ -1,26 +1,21 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.gkonovalov'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
-
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 2
-        versionName "1.0.1"
+        targetSdkVersion 33
 
         setProperty("archivesBaseName", "android-vad-v" + versionName)
 
         ndk {
-            abiFilters "armeabi-v7a", "x86", "x86_64", "arm64-v8a"
+            abiFilters "armeabi-v7a"
         }
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
     externalNativeBuild {
@@ -36,12 +31,10 @@ android {
         }
     }
 
+    ndkVersion "23.1.7779620"
+    namespace 'com.konovalov.vad'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

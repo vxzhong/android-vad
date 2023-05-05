@@ -7,32 +7,24 @@
  *  in the file PATENTS.  All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-
 /*
  * This header file includes the VAD API calls. Specific function calls are
  * given below.
  */
-
 #ifndef COMMON_AUDIO_VAD_INCLUDE_WEBRTC_VAD_H_  // NOLINT
 #define COMMON_AUDIO_VAD_INCLUDE_WEBRTC_VAD_H_
-
 #include <stddef.h>
 #include <stdint.h>
-
 typedef struct WebRtcVadInst VadInst;
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 // Creates an instance to the VAD structure.
 VadInst* WebRtcVad_Create(void);
-
 // Frees the dynamic memory of a specified VAD instance.
 //
 // - handle [i] : Pointer to VAD instance that should be freed.
 void WebRtcVad_Free(VadInst* handle);
-
 // Initializes a VAD instance.
 //
 // - handle [i/o] : Instance that should be initialized.
@@ -40,7 +32,6 @@ void WebRtcVad_Free(VadInst* handle);
 // returns        : 0 - (OK),
 //                 -1 - (null pointer or Default mode could not be set).
 int WebRtcVad_Init(VadInst* handle);
-
 // Sets the VAD operating mode. A more aggressive (higher mode) VAD is more
 // restrictive in reporting speech. Put in other words the probability of being
 // speech when the VAD returns 1 is increased with increasing mode. As a
@@ -53,8 +44,7 @@ int WebRtcVad_Init(VadInst* handle);
 //                 -1 - (null pointer, mode could not be set or the VAD instance
 //                       has not been initialized).
 int WebRtcVad_set_mode(VadInst* handle, int mode);
-
-// Calculates a VAD decision for the |audio_frame|. For valid sampling rates
+// Calculates a VAD decision for the `audio_frame`. For valid sampling rates
 // frame lengths, see the description of WebRtcVad_ValidRatesAndFrameLengths().
 //
 // - handle       [i/o] : VAD Instance. Needs to be initialized by
@@ -70,8 +60,7 @@ int WebRtcVad_Process(VadInst* handle,
                       int fs,
                       const int16_t* audio_frame,
                       size_t frame_length);
-
-// Checks for valid combinations of |rate| and |frame_length|. We support 10,
+// Checks for valid combinations of `rate` and `frame_length`. We support 10,
 // 20 and 30 ms frames and the rates 8000, 16000 and 32000 Hz.
 //
 // - rate         [i] : Sampling frequency (Hz).
@@ -79,9 +68,7 @@ int WebRtcVad_Process(VadInst* handle,
 //
 // returns            : 0 - (valid combination), -1 - (invalid combination)
 int WebRtcVad_ValidRateAndFrameLength(int rate, size_t frame_length);
-
 #ifdef __cplusplus
 }
 #endif
-
 #endif  // COMMON_AUDIO_VAD_INCLUDE_WEBRTC_VAD_H_  // NOLINT

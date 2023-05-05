@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements VoiceRecorder.Lis
     private VadConfig.FrameSize DEFAULT_FRAME_SIZE = VadConfig.FrameSize.FRAME_SIZE_160;
     private VadConfig.Mode DEFAULT_MODE = VadConfig.Mode.VERY_AGGRESSIVE;
 
-    private int DEFAULT_SILENCE_DURATION = 500;
+    private int DEFAULT_SILENCE_DURATION = 1800;
     private int DEFAULT_VOICE_DURATION = 500;
 
     private final String SPINNER_SAMPLE_RATE_TAG = "sample_rate";

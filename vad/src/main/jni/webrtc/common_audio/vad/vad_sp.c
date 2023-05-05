@@ -8,17 +8,17 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#include <assert.h>
-#include "vad_sp.h"
+#include "webrtc/common_audio/vad/vad_sp.h"
+
+#include "webrtc/headers//checks.h"
 #include "webrtc/common_audio/signal_processing/include/signal_processing_library.h"
-#include "vad_core.h"
+#include "webrtc/common_audio/vad/vad_core.h"
 
 // Allpass filter coefficients, upper and lower, in Q13.
 // Upper: 0.64, Lower: 0.17.
 static const int16_t kAllPassCoefsQ13[2] = { 5243, 1392 };  // Q13.
 static const int16_t kSmoothingDown = 6553;  // 0.2 in Q15.
 static const int16_t kSmoothingUp = 32439;  // 0.99 in Q15.
-
 
 // TODO(bjornv): Move this function to vad_filterbank.c.
 // Downsampling filter based on splitting filter and allpass functions.
@@ -52,7 +52,7 @@ void WebRtcVad_Downsampling(const int16_t* signal_in,
   filter_state[1] = tmp32_2;
 }
 
-// Inserts |feature_value| into |low_value_vector|, if it is one of the 16
+// Inserts `feature_value` into `low_value_vector`, if it is one of the 16
 // smallest values the last 100 frames. Then calculates and returns the median
 // of the five smallest values.
 int16_t WebRtcVad_FindMinimum(VadInstT* self,
@@ -66,13 +66,13 @@ int16_t WebRtcVad_FindMinimum(VadInstT* self,
   int16_t alpha = 0;
   int32_t tmp32 = 0;
   // Pointer to memory for the 16 minimum values and the age of each value of
-  // the |channel|.
+  // the `channel`.
   int16_t* age = &self->index_vector[offset];
   int16_t* smallest_values = &self->low_value_vector[offset];
 
-  assert(channel < kNumChannels);
+  RTC_DCHECK_LT(channel, kNumChannels);
 
-  // Each value in |smallest_values| is getting 1 loop older. Update |age|, and
+  // Each value in `smallest_values` is getting 1 loop older. Update `age`, and
   // remove old values.
   for (i = 0; i < 16; i++) {
     if (age[i] != 100) {
@@ -88,9 +88,9 @@ int16_t WebRtcVad_FindMinimum(VadInstT* self,
     }
   }
 
-  // Check if |feature_value| is smaller than any of the values in
-  // |smallest_values|. If so, find the |position| where to insert the new value
-  // (|feature_value|).
+  // Check if `feature_value` is smaller than any of the values in
+  // `smallest_values`. If so, find the `position` where to insert the new value
+  // (`feature_value`).
   if (feature_value < smallest_values[7]) {
     if (feature_value < smallest_values[3]) {
       if (feature_value < smallest_values[1]) {
@@ -152,7 +152,7 @@ int16_t WebRtcVad_FindMinimum(VadInstT* self,
     age[position] = 1;
   }
 
-  // Get |current_median|.
+  // Get `current_median`.
   if (self->frame_counter > 2) {
     current_median = smallest_values[2];
   } else if (self->frame_counter > 0) {

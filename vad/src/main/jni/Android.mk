@@ -6,7 +6,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := vad_jni
 LOCAL_LDLIBS := -lm -llog
-LOCAL_CFLAGS := -DWEBRTC_ANDROID -D__ARMEL__
+LOCAL_CFLAGS := -DWEBRTC_ANDROID -D__ARMEL__ -DWEBRTC_ARCH_ARM_V7
 
 LOCAL_SRC_FILES := vad_jni.c  \
    webrtc/common_audio/vad/webrtc_vad.c \

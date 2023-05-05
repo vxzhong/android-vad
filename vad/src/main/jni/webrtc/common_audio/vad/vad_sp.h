@@ -13,7 +13,7 @@
 #ifndef COMMON_AUDIO_VAD_VAD_SP_H_
 #define COMMON_AUDIO_VAD_VAD_SP_H_
 
-#include "vad_core.h"
+#include "webrtc/common_audio/vad/vad_core.h"
 
 // Downsamples the signal by a factor 2, eg. 32->16 or 16->8.
 //
@@ -23,11 +23,11 @@
 //
 // Input & Output:
 //      - filter_state  : Current filter states of the two all-pass filters. The
-//                        |filter_state| is updated after all samples have been
+//                        `filter_state` is updated after all samples have been
 //                        processed.
 //
 // Output:
-//      - signal_out    : Downsampled signal (of length |in_length| / 2).
+//      - signal_out    : Downsampled signal (of length `in_length` / 2).
 void WebRtcVad_Downsampling(const int16_t* signal_in,
                             int16_t* signal_out,
                             int32_t* filter_state,
@@ -35,7 +35,7 @@ void WebRtcVad_Downsampling(const int16_t* signal_in,
 
 // Updates and returns the smoothed feature minimum. As minimum we use the
 // median of the five smallest feature values in a 100 frames long window.
-// As long as |handle->frame_counter| is zero, that is, we haven't received any
+// As long as `handle->frame_counter` is zero, that is, we haven't received any
 // "valid" data, FindMinimum() outputs the default value of 1600.
 //
 // Inputs:
